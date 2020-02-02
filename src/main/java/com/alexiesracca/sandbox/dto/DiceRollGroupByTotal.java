@@ -1,6 +1,6 @@
 package com.alexiesracca.sandbox.dto;
 
-public class DiceRollGroupByTotal {
+public class DiceRollGroupByTotal extends GenericDto{
 
 int total;
 

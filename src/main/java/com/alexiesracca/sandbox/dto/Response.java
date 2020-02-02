@@ -2,50 +2,47 @@ package com.alexiesracca.sandbox.dto;
 
 import java.util.List;
 
-import com.alexiesracca.sandbox.entity.GenericEntity;
 
 public class Response{
 	
-	public static enum ResponseStatus {
+	public static enum Status {
 		SUCCESS,
 		FAILURE
 	}
 	
-	private GenericEntity entity;
+	private GenericDto dto;
 	
 	private String text;
 	
-	private List<GenericEntity> list;
+	private List<GenericDto> list;
 	
 	private String message;
 	
-	private ResponseStatus status;
+	private Status status;
 	
-	public Response(ResponseStatus status, String message){
-		
+	public Response(Status status, String message){
+		this.status = status;
+		this.message = message;
 	}
 	
-	public Response(ResponseStatus status, String message, String text){
+	public Response(Status status, String message, String text){
 		this(status, message);
 		setText(text);
 	}
 	
-	public Response(ResponseStatus status, String message, GenericEntity entity){
+	public Response(Status status, String message, GenericDto dto){
 		this(status, message);
-		setEntity(entity);
+		setDto(dto);
 	}
 	
-	public Response(ResponseStatus status, String message, List<GenericEntity> list){
+	// public Response(Status status, String message, List<GenericDto> list){
+	// 	this(status, message);
+	// 	setList(list);
+	// }
+
+	public Response(Status status, String message, List list){
 		this(status, message);
 		setList(list);
-	}
-
-	public GenericEntity getEntity() {
-		return entity;
-	}
-
-	public void setEntity(GenericEntity entity) {
-		this.entity = entity;
 	}
 
 	public String getText() {
@@ -56,14 +53,6 @@ public class Response{
 		this.text = text;
 	}
 
-	public List<GenericEntity> getList() {
-		return list;
-	}
-
-	public void setList(List<GenericEntity> list) {
-		this.list = list;
-	}
-
 	public String getMessage() {
 		return message;
 	}
@@ -72,12 +61,28 @@ public class Response{
 		this.message = message;
 	}
 
-	public ResponseStatus getStatus() {
+	public Status getStatus() {
 		return status;
 	}
 
-	public void setStatus(ResponseStatus status) {
+	public void setStatus(Status status) {
 		this.status = status;
+	}
+
+	public GenericDto getDto() {
+		return dto;
+	}
+
+	public void setDto(GenericDto dto) {
+		this.dto = dto;
+	}
+
+	public List<GenericDto> getList() {
+		return list;
+	}
+
+	public void setList(List<GenericDto> list) {
+		this.list = list;
 	}
 		
 }

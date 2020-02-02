@@ -1,6 +1,6 @@
 package com.alexiesracca.sandbox.dto;
 
-public class DiceRollGroupByPieceSideRelativeDistribution {
+public class DiceRollGroupByPieceSideRelativeDistribution extends GenericDto{
 
     int piece;
     int side;
