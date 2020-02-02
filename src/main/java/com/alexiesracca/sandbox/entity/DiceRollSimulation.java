@@ -2,12 +2,12 @@ package com.alexiesracca.sandbox.entity;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+
 
 @Entity
 public class DiceRollSimulation extends GenericEntity {
@@ -21,9 +21,6 @@ public class DiceRollSimulation extends GenericEntity {
     @Column
     int roll;
 
-    @Column
-    String pieceSide;
-
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "dice_roll_simulation_id")
     List<DiceRoll> diceRolls = new ArrayList<DiceRoll>();
@@ -32,7 +29,6 @@ public class DiceRollSimulation extends GenericEntity {
         this.piece = piece;
         this.side = side;
         this.roll = roll;
-        this.pieceSide = piece+"-"+side;
     }
 
     public DiceRollSimulation(){}
@@ -77,14 +73,6 @@ public class DiceRollSimulation extends GenericEntity {
 
     public void setRoll(int roll) {
         this.roll = roll;
-    }
-
-    public String getPieceSide() {
-        return piece+"-"+side;
-    }
-
-    public void setPieceSide(String pieceSide) {
-        this.pieceSide = pieceSide;
     }
 
     public List<DiceRoll> getDiceRolls() {

@@ -1,7 +1,6 @@
 package com.alexiesracca.sandbox.entity;
 
 import java.util.Arrays;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -11,9 +10,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Transient;
-
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
+
+
 
 @Entity
 public class DiceRoll{
@@ -21,9 +21,6 @@ public class DiceRoll{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     Long id;	
-
-    @Column
-    private String pieceSide;
 
     @Column
     private int piece;
@@ -50,11 +47,11 @@ public class DiceRoll{
     public DiceRoll(int piece, int side){
         this.piece = piece;
         this.side = side;
-        this.pieceSide = piece+"-"+side;
     }
 
     public DiceRoll(){}
 
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof DiceRollSimulation )) return false;
@@ -68,10 +65,6 @@ public class DiceRoll{
 
     public String getPieceSide() {
         return piece+"-"+side;
-    }
-
-    public void setPieceSide(String pieceSide) {
-        this.pieceSide = pieceSide;
     }
 
     public int getPiece() {

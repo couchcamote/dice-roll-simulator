@@ -1,4 +1,4 @@
-package com.alexiesracca.sandbox.entity;
+package com.alexiesracca.sandbox.dto;
 
 public class DiceRollGroupByTotal {
 
