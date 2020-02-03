@@ -40,6 +40,9 @@ Run the Application
         spring-boot:run
 
 
+## Run the Front-End 
+Go the [Front End](https://github.com/couchcamote/dice-roll-simulator-web) page and follow the instruction.
+
 
 ## Tools and Utilities
 
