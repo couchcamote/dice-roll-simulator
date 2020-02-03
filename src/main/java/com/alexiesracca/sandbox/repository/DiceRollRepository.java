@@ -49,19 +49,19 @@ public interface DiceRollRepository extends CrudRepository<DiceRoll, Long>{
        + " , count(distinct dice_roll_simulation_id) as simulationCount "
        + " ) "
        + " from DiceRoll dc "
-       + " group by dc.piece")
+       + " group by dc.piece, dc.side")
        public List<DiceRollGroupByPieceSide> groupByPieceSide();
 
 
     //By PieceSide - Relative Distribution
-    //select piece, side, cast (count(*) as float) / cast((select count(*) from  dice_roll) as float) from dice_roll where piece = 3 and side = 6 group by piece, side
+    //select piece, side, cast (count(*) as float) / cast((select count(*) from  dice_roll) as float) from dice_roll where piece = 3 and side = 6 group by total
        @Query("select new com.alexiesracca.sandbox.dto.DiceRollGroupByPieceSideRelativeDistribution "
        + " ( "
        + "   dc.piece as piece "
        + " , dc.side as side "
        + " , dc.total as total "
        + " , count(*) as count "
-       + " , cast (count(*) as float) * 100 / cast((select count(*) from  DiceRoll) as float)  "
+       + " , cast (count(*) as float) * 100 / cast((select count(*) from  DiceRoll dc2 where dc2.piece = :piece and dc2.side = :side) as float)  "
        + " ) "
        + " from DiceRoll dc "
        + " where dc.piece = :piece "
