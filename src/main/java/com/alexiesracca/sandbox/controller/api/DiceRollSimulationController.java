@@ -13,7 +13,9 @@ import com.alexiesracca.sandbox.service.DiceRollSimulationService;
 import com.alexiesracca.sandbox.service.EntityService;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -25,6 +27,8 @@ import org.springframework.web.bind.annotation.RestController;
  */
 
 @RestController
+@CrossOrigin(origins = { "http://localhost:4200" }, maxAge = 3000)
+@RequestMapping("/api")
 public class DiceRollSimulationController {
 
     @Autowired
@@ -36,7 +40,7 @@ public class DiceRollSimulationController {
     @Autowired
     DiceRollSimulationService simulationService;
     
-    @GetMapping(value = "/api/simulate")
+    @GetMapping(value = "/simulate")
     public Response runSimulation(
             @RequestParam("piece") int piece,
             @RequestParam("side") int side,
@@ -68,14 +72,14 @@ public class DiceRollSimulationController {
         return new Response(Response.Status.SUCCESS, "Success", list);
     }
 
-    @GetMapping(value = "/api/piece-side")
+    @GetMapping(value = "/piece-side")
     public Response retrieveAllPieceSide(){
         List<DiceRollGroupByPieceSide> list = rollRepository.groupByPieceSide();
         return new Response(Response.Status.SUCCESS, "Success", list);
     }
 
 
-    @GetMapping(value = "/api/piece-side-relative-dist")
+    @GetMapping(value = "/piece-side-relative-dist")
     public Response retrieveAllPieceSideRelativeDistribution(
             @RequestParam("piece") int piece,
             @RequestParam("side") int side
@@ -97,13 +101,13 @@ public class DiceRollSimulationController {
 
 
     /************************************************* */
-    @GetMapping(value = "/api/retieveAllTotalCount")
+    @GetMapping(value = "/retieveAllTotalCount")
     public Response retrieveAll(){
         List<DiceRollGroupByTotal> list = rollRepository.groupByTotal();
         return new Response(Status.SUCCESS, "Success", list); 
     }
 
-    @GetMapping(value = "/api/retieveTotalCountBySimulation")
+    @GetMapping(value = "/retieveTotalCountBySimulation")
     public Response retrieveBySimulation(@RequestParam("simulationId") Long id
             ){
        //Validation
