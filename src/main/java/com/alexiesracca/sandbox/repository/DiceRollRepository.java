@@ -59,12 +59,14 @@ public interface DiceRollRepository extends CrudRepository<DiceRoll, Long>{
        + " ( "
        + "   dc.piece as piece "
        + " , dc.side as side "
+       + " , dc.total as total "
+       + " , count(*) as count "
        + " , cast (count(*) as float) * 100 / cast((select count(*) from  DiceRoll) as float)  "
        + " ) "
        + " from DiceRoll dc "
        + " where dc.piece = :piece "
        + " and dc.side = :side "
-       + " group by dc.piece, dc.side ")
+       + " group by dc.total ")
        public List<DiceRollGroupByPieceSideRelativeDistribution> relativeDistributionByPieceSide(
         @Param("piece") int piece, @Param("side") int side
        );

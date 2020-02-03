@@ -4,17 +4,19 @@ public class DiceRollGroupByPieceSideRelativeDistribution extends GenericDto{
 
     int piece;
     int side;
+    int total;    
     float distribution;
+    long count;
 
-    public DiceRollGroupByPieceSideRelativeDistribution(int piece, int side, float distribution) {
+    public DiceRollGroupByPieceSideRelativeDistribution(int piece, int side, int total, long count,  float distribution) {
         this.piece = piece;
         this.side = side;
+        this.total = total;
+        this.count = count;
         this.distribution = distribution;
     }
 
-    public DiceRollGroupByPieceSideRelativeDistribution() {
-
-    }
+    public DiceRollGroupByPieceSideRelativeDistribution() { }
 
     public int getPiece() {
         return piece;
@@ -39,6 +41,22 @@ public class DiceRollGroupByPieceSideRelativeDistribution extends GenericDto{
     public void setDistribution(float distribution) {
         this.distribution = distribution;
     }
+
+	public int getTotal() {
+		return total;
+	}
+
+	public void setTotal(int total) {
+		this.total = total;
+	}
+
+	public long getCount() {
+		return count;
+	}
+
+	public void setCount(long count) {
+		this.count = count;
+	}
 
     
 }

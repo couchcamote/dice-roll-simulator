@@ -95,7 +95,7 @@ public class DiceRollSimulationController {
         }                 
         List<DiceRollGroupByPieceSideRelativeDistribution> list = rollRepository.relativeDistributionByPieceSide(piece, side);
         if(list == null || list.size() == 0) {
-        	DiceRollGroupByPieceSideRelativeDistribution d = new DiceRollGroupByPieceSideRelativeDistribution(piece, side, 0);
+        	DiceRollGroupByPieceSideRelativeDistribution d = new DiceRollGroupByPieceSideRelativeDistribution(piece, side, 0, 0, 0);
         	list = new ArrayList<DiceRollGroupByPieceSideRelativeDistribution>();
         	list.add(d);
         }
