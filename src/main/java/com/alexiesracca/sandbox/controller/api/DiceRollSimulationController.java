@@ -11,6 +11,8 @@ import com.alexiesracca.sandbox.repository.DiceRollRepository;
 import com.alexiesracca.sandbox.repository.DiceRollSimulationRepository;
 import com.alexiesracca.sandbox.service.DiceRollSimulationService;
 import com.alexiesracca.sandbox.service.EntityService;
+
+import java.util.ArrayList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -92,6 +94,11 @@ public class DiceRollSimulationController {
             return new Response(Response.Status.FAILURE, "Minimum side is 4");
         }                 
         List<DiceRollGroupByPieceSideRelativeDistribution> list = rollRepository.relativeDistributionByPieceSide(piece, side);
+        if(list == null || list.size() == 0) {
+        	DiceRollGroupByPieceSideRelativeDistribution d = new DiceRollGroupByPieceSideRelativeDistribution(piece, side, 0);
+        	list = new ArrayList<DiceRollGroupByPieceSideRelativeDistribution>();
+        	list.add(d);
+        }
         return new Response(Response.Status.SUCCESS, "Success", list);               
     }
 
