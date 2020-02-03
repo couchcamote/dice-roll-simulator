@@ -19,7 +19,7 @@ For each dice number-dice side combination, show the total rolls and the number 
 
 ## Show Dice Number-Dice Side Relative Distribution 
 
-For a dice number-dice side combination, show the relative distribution of rolls compared to all simulations
+For a dice number-dice side combination, show the relative distribution of each totals compared to all simulations
 
 
 
