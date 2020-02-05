@@ -38,7 +38,7 @@ Run the Application
 
 > mvn spring-boot:run
 
-The server should be available on [localhost:8080](localhost:8080) or the one configured in [application.propertues](https://github.com/couchcamote/dice-roll-simulator/blob/master/src/main/resources/application.properties.) 
+The server should be available on [http:/localhost:8080](http://localhost:8080) or the one configured in [application.properties](https://github.com/couchcamote/dice-roll-simulator/blob/master/src/main/resources/application.properties.) 
 
 e.g server.port=8080
 
