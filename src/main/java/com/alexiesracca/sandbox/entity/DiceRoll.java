@@ -1,6 +1,7 @@
 package com.alexiesracca.sandbox.entity;
 
 import java.util.Arrays;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -10,21 +11,23 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Transient;
+import javax.validation.constraints.Min;
+
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
-
-
 @Entity
-public class DiceRoll{
+public class DiceRoll {
 
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    Long id;	
+    Long id;
 
+    @Min(value = 1, message = "Piece should be atleast 1")
     @Column
     private int piece;
 
+    @Min(value = 4, message = "Piece should be atleast 4")
     @Column
     private int side;
 
@@ -37,34 +40,35 @@ public class DiceRoll{
     @Transient
     String[] combinationArray;
 
-    @ManyToOne(
-        fetch = FetchType.LAZY
-    )
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "dice_roll_simulation_id")
     @OnDelete(action = OnDeleteAction.CASCADE)
     private DiceRollSimulation diceRollSimulation;
 
-    public DiceRoll(int piece, int side){
+    public DiceRoll(int piece, int side) {
         this.piece = piece;
         this.side = side;
     }
 
-    public DiceRoll(){}
+    public DiceRoll() {
+    }
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof DiceRollSimulation )) return false;
+        if (this == o)
+            return true;
+        if (!(o instanceof DiceRollSimulation))
+            return false;
         return id != null && id.equals(((DiceRoll) o).getId());
     }
- 
+
     @Override
     public int hashCode() {
         return 31;
     }
 
     public String getPieceSide() {
-        return piece+"-"+side;
+        return piece + "-" + side;
     }
 
     public int getPiece() {

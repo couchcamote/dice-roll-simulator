@@ -7,17 +7,21 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+import javax.validation.constraints.Min;
 
 
 @Entity
 public class DiceRollSimulation extends GenericEntity {
 
+    @Min(value = 1, message = "Piece should be atleast 1")
     @Column
     int piece;
 
+    @Min(value = 4, message = "Side should be atleast 4")
     @Column
     int side;
 
+    @Min(value = 1, message = "Roll should be atleast 1")
     @Column
     int roll;
 

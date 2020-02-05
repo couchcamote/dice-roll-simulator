@@ -1,48 +1,58 @@
 package com.alexiesracca.sandbox.service;
 
-import org.springframework.stereotype.Service;
-
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
+import com.alexiesracca.sandbox.dto.DiceRollGroupByPieceSide;
+import com.alexiesracca.sandbox.dto.DiceRollGroupByPieceSideRelativeDistribution;
+import com.alexiesracca.sandbox.dto.DiceRollGroupByTotal;
 import com.alexiesracca.sandbox.entity.DiceRoll;
+import com.alexiesracca.sandbox.entity.DiceRollSimulation;
+import com.alexiesracca.sandbox.helper.DiceRollHelper;
+import com.alexiesracca.sandbox.repository.DiceRollRepository;
+import com.alexiesracca.sandbox.repository.DiceRollSimulationRepository;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 @Service
 public class DiceRollSimulationService {
 
-    private static Random random = new Random();
+    @Autowired
+    DiceRollSimulationRepository simulationRepository;
 
-    public static List<DiceRoll> roll(int rollCount, int piece, int side) {
-        List <DiceRoll> rolls = new ArrayList<DiceRoll>();
-        DiceRoll roll = null;
-        for(int r = 0; r < rollCount; r++){
-            roll = new DiceRoll(piece, side);
-            int total = 0;
-            String [] pieceRoll = new String [piece];
-            for(int p = 0 ; p < piece; p++){
-                int up = rollDice(side);;
-                pieceRoll[p] = ""+up;
-                total+=up;
-            }
-            roll.setCombinationArray(pieceRoll);
-            roll.setTotal(total);
-            rolls.add(roll);
+    @Autowired
+    DiceRollRepository rollRepository;
+
+    public DiceRollSimulation simulateRolls(int roll, int piece, int side) {
+        DiceRollSimulation simulation = new DiceRollSimulation(piece, side, roll);
+        List<DiceRoll> rolls = DiceRollHelper.roll(roll, piece, side);
+        simulation.addRolls(rolls);
+        EntityService.updateEntity(simulation);
+        DiceRollSimulation persistedSimulation = simulationRepository.save(simulation);
+        return persistedSimulation;
+    }
+
+    public List<DiceRollGroupByTotal> retrieveTotalBySimulation(DiceRollSimulation simulation) {
+        return rollRepository.groupByTotalBySimulation(simulation);
+    }
+
+    public List<DiceRollGroupByPieceSide> retrieveAllPieceSide() {
+        List<DiceRollGroupByPieceSide> list = rollRepository.groupByPieceSide();
+        return list;
+    }
+
+    public List<DiceRollGroupByPieceSideRelativeDistribution> retrieveAllPieceSideRelativeDistribution(int piece,
+            int side) {
+        List<DiceRollGroupByPieceSideRelativeDistribution> list = rollRepository.relativeDistributionByPieceSide(piece,
+                side);
+        if (list == null || list.size() == 0) {
+            DiceRollGroupByPieceSideRelativeDistribution d = new DiceRollGroupByPieceSideRelativeDistribution(piece,
+                    side, 0, 0, 0);
+            list = new ArrayList<DiceRollGroupByPieceSideRelativeDistribution>();
+            list.add(d);
         }
-        return rolls;
+        return list;
     }
-
-    public static int rollDice(int side){
-        int r = random.nextInt(side) + 1;
-        return r;
-    }
-
-public static void main(String[] args) {
-    int side = 6;
-    int roll = 100;
-    for (int i = 0; i < roll; i++){
-        System.out.println(i + " > "+ rollDice(side));
-    }
-}
 
 }
