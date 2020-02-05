@@ -38,11 +38,11 @@ Run the Application
 
 > mvn spring-boot:run
 
-The server should be available on [localhost:8080](localhost:8080) or the one configured in [application.propertues](https://github.com/couchcamote/dice-roll-simulator/blob/master/src/main/resources/application.properties. 
+The server should be available on [localhost:8080](localhost:8080) or the one configured in [application.propertues](https://github.com/couchcamote/dice-roll-simulator/blob/master/src/main/resources/application.properties.) 
 
 e.g server.port=8080
 
-Check that the Back-end API can receive request by trying the built-in [Swagger Page]((http://localhost:8080/swagger-ui.html))
+Check that the Back-end API can receive request by trying the built-in [Swagger Page](http://localhost:8080/swagger-ui.html)
 
 
 ### From Eclipse
