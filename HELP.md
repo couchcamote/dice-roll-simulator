@@ -4,7 +4,7 @@
 
 This application is separated into 2 parts, the Backend Server with Spring Boot and the [front-end](https://github.com/couchcamote/dice-roll-simulator-web) with Angular.
 
-The back-end contains an embedded H2 database on runtime and currently configured to be an *in-memory storage*. This can changed into persisted file by changing the datasource URL to the a local directory.
+The back-end contains an embedded H2 database on runtime and currently configured to be an *in-memory storage = jdbc:h2:mem:db*. This can be changed into a persisted file storage by changing the datasource URL to the a local directory.
 
 e.g. *spring.datasource.url = jdbc:h2:file:C:/data/sample*
 
@@ -38,9 +38,11 @@ Run the Application
 
 > mvn spring-boot:run
 
-The server should be available on localhost:8080 or the one configured in [application.propertues](https://github.com/couchcamote/dice-roll-simulator/blob/master/src/main/resources/application.properties)
+The server should be available on [localhost:8080](localhost:8080) or the one configured in [application.propertues](https://github.com/couchcamote/dice-roll-simulator/blob/master/src/main/resources/application.properties. 
 
 e.g server.port=8080
+
+Check that the Back-end API can receive request by trying the built-in [Swagger Page]((http://localhost:8080/swagger-ui.html))
 
 
 ### From Eclipse
